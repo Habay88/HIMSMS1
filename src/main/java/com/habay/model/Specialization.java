@@ -3,13 +3,17 @@ package com.habay.model;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="specialization")
@@ -22,7 +26,14 @@ public class Specialization {
 	@Column(name="specializationname", length=100, nullable=false,unique=true)
 	private String specializationName;
 	
-@ManyToMany(mappedBy="specializations")
+	
+	 @ManyToMany(fetch = FetchType.LAZY,
+		      cascade = {
+		          CascadeType.PERSIST,
+		          CascadeType.MERGE
+		      },
+mappedBy="specializations")
+	 @JsonIgnore
 private List<Doctor> doctors;
 
 

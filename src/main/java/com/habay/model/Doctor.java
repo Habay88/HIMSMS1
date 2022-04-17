@@ -37,7 +37,12 @@ public class Doctor {
 	@Column(name="create_time")
 	private LocalDateTime createTime;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY,
+		      cascade = {
+		          CascadeType.PERSIST,
+		          CascadeType.MERGE
+		      })
+	//@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="doctor_specialization",
 	joinColumns = @JoinColumn(name="specialization_Id",
 	referencedColumnName="id"),

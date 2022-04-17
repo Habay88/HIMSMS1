@@ -11,6 +11,8 @@ import com.habay.model.Doctor;
 
 @Repository
 public interface DoctorRepository extends CrudRepository<Doctor, Long> {
+	
+	 List<Doctor> findDoctorBySpecializations(Long SpecializationId);
 
 	@Query(value = "SELECT * FROM doctor d WHERE d.firstName=:firstName AND d.lastName=:lastName", nativeQuery = true)
 public Optional<Doctor> findByfirstNameandlastName(String firstName, String lastName);
