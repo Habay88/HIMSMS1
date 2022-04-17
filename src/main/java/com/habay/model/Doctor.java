@@ -1,5 +1,6 @@
 package com.habay.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -8,35 +9,53 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
-@Table(name="course")
-public class Course {
+@Table(name="doctor")
+public class Doctor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="title", length=100, nullable=false)
-	private String title;
+	@Column(name="firstname", length=100, nullable=false)
+	private String firstName;
 	
-	@Column(name="subtitle", length=100, nullable=false)
-	private String subTitle;
+	@Column(name="lastname", length=100, nullable=false)
+	private String lastName;
 	
-	@Column(name="price", length=100, nullable=false)
-	private Double price;
+	 @Email(message = "Please enter a valid e-mail address")
+		@Column(length = 120, nullable = false, unique = true)
+		private String email;
 	
+	@Column(name="professionalstatement", length=100, nullable=false)
+	private String professionalStatement;
+	
+	
+	@Column(name="practicingfrom", nullable=false)
+	private LocalDate practicing_from;
+
 	@Column(name="create_time")
 	private LocalDateTime createTime;
 
-	public Course() {
+	
+	
+
+	public Doctor() {
+		super();
 	}
 
-	public Course(Long id, String title, String subTitle, Double price, LocalDateTime createTime) {
+	public Doctor(Long id, String firstName, String lastName, String email, String professionalStatement, 
+			LocalDate practicing_from, LocalDateTime createTime) {
 		
-		this.title = title;
-		this.subTitle = subTitle;
-		this.price = price;
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.professionalStatement = professionalStatement;
+		
+		this.practicing_from = practicing_from;
 		this.createTime = createTime;
 	}
 
@@ -48,28 +67,38 @@ public class Course {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getSubTitle() {
-		return subTitle;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSubTitle(String subTitle) {
-		this.subTitle = subTitle;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public Double getPrice() {
-		return price;
+	public String getProfessionalStatement() {
+		return professionalStatement;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setProfessionalStatement(String professionalStatement) {
+		this.professionalStatement = professionalStatement;
+	}
+
+
+
+	public LocalDate getPracticing_from() {
+		return practicing_from;
+	}
+
+	public void setPracticing_from(LocalDate practicing_from) {
+		this.practicing_from = practicing_from;
 	}
 
 	public LocalDateTime getCreateTime() {
@@ -79,6 +108,14 @@ public class Course {
 	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	
 }

@@ -11,38 +11,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.habay.model.Course;
-import com.habay.service.CourseService;
+import com.habay.model.Doctor;
+
+import com.habay.service.DoctorService;
 
 @RestController
-@RequestMapping("api/course")
-public class CourseController {
+@RequestMapping("api/doctor")
+public class DoctorController {
 	
 	@Autowired
-	CourseService cservice;
+	DoctorService dservice;
+
 
 	@PostMapping
-	public ResponseEntity<?> saveCourse(@RequestBody Course course)
+	public ResponseEntity<?> saveDoctor(@RequestBody Doctor doctor)
 	{
-		return new ResponseEntity<>(cservice.saveCourse(course),HttpStatus.CREATED);
-	}
+		if(dservice.findByfirstNameandlastNameandemail(doctor.getFirstName(),doctor.getLastName(),doctor.getEmail()).isPresent()){
+		return new ResponseEntity<>(HttpStatus.CONFLICT);	
+		}
+		return new ResponseEntity<>(dservice.saveDoctor(doctor),HttpStatus.CREATED);
+		}
+	//	return new ResponseEntity<>(dservice.saveDoctor(doctor),HttpStatus.CREATED);
+	//}
 	
-	@DeleteMapping("{courseId}")
-	public ResponseEntity<?> deleteCourse(@PathVariable Long courseId){
-		cservice.deleteCourse(courseId);
+	@DeleteMapping("{doctorId}")
+	public ResponseEntity<?> deleteDoctor(@PathVariable Long doctorId){
+		dservice.deleteDoctor(doctorId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping 
-	public ResponseEntity<?> getAllCourses()
+	public ResponseEntity<?> getAllDoctors()
 	{
-		return ResponseEntity.ok(cservice.findAllCourses());
+		return ResponseEntity.ok(dservice.findAllDoctors());
 	}
 	
 	@GetMapping("/{id}") 
 	public ResponseEntity<?> getOne(@PathVariable Long id)
 	{
-		return ResponseEntity.ok(cservice.findOne(id));
+		return ResponseEntity.ok(dservice.findOne(id));
 	}
 	
 }

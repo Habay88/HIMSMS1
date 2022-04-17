@@ -3,17 +3,21 @@ package com.habay.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.habay.model.Course;
+import com.habay.model.Doctor;
 
-public interface CourseService {
+public interface DoctorService {
 
-	Course saveCourse(Course course);
+	Doctor saveDoctor(Doctor doctor);
 
-	void deleteCourse(Long courseId);
+	void deleteDoctor(Long doctorId);
 
-	List<Course> findAllCourses();
+	List<Doctor> findAllDoctors();
 
-	Optional<Course> findOne(Long id);
+public Optional<Doctor> findOne(Long id);
+	
+public 	Optional<Doctor> findByfirstNameandlastName(String firstName,String lastName);
+
+public Optional<Doctor> findByfirstNameandlastNameandemail(String firstName,String lastName, String email);
 
 	
 

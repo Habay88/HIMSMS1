@@ -8,37 +8,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.habay.exception.NotFoundException;
-import com.habay.model.Course;
-import com.habay.repo.CourseRepository;
+
+import com.habay.model.Doctor;
+
+import com.habay.repo.DoctorRepository;
 
 @Service
-public class CourseServiceImpl implements CourseService{
+public class DoctorServiceImpl implements DoctorService{
 
 	@Autowired
-	private CourseRepository crepo;
+	private DoctorRepository drepo;
 
-	public CourseServiceImpl(CourseRepository crepo) {
+	
+	public DoctorServiceImpl(DoctorRepository drepo) {
 		
-		this.crepo = crepo;
+		this.drepo = drepo;
 	}
 	@Override
-	 public Course saveCourse(Course course) {
-		 course.setCreateTime(LocalDateTime.now());
-		 return crepo.save(course);
+	 public Doctor saveDoctor(Doctor doctor) {
+		 doctor.setCreateTime(LocalDateTime.now());
+		 return drepo.save(doctor);
 	 }
 	@Override
-	public void deleteCourse(Long courseId) {
-		crepo.deleteById(courseId);
+	public void deleteDoctor(Long doctorId) {
+		drepo.deleteById(doctorId);
 	}
 	@Override
-public List<Course> findAllCourses(){
-	return (List<Course>) crepo.findAll();
+public List<Doctor> findAllDoctors(){
+	return (List<Doctor>) drepo.findAll();
 }	
 	
 	@Override
-	public Optional<Course> findOne(Long id){
-		return  crepo.findById(id);
+	public Optional<Doctor> findOne(Long id){
+		return  drepo.findById(id);
 	}
+	@Override
+	public Optional<Doctor> findByfirstNameandlastName(String firstName, String lastName) {
+		// TODO Auto-generated method stub
+		return drepo.findByfirstNameandlastName(firstName,lastName);
+	}
+	@Override
+	public Optional<Doctor> findByfirstNameandlastNameandemail(String firstName, String lastName, String email) {
+		// TODO Auto-generated method stub
+		return drepo.findByfirstNameandlastNameandemail(firstName, lastName, email);
+	}
+	
 
 }
 	
