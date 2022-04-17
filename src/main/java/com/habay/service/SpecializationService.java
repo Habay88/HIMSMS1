@@ -12,7 +12,7 @@ public interface SpecializationService {
 	
 	public Optional <Specialization> editSpecialization(Long id);
 
-	void deleteSpecialization(Long specializationId);
+	void deleteSpecialization(Long id);
 
 	List<Specialization> findAllSpecializations();
 

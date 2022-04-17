@@ -1,10 +1,14 @@
 package com.habay.model;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,17 +22,24 @@ public class Specialization {
 	@Column(name="specializationname", length=100, nullable=false,unique=true)
 	private String specializationName;
 	
+@ManyToMany(mappedBy="specializations")
+private List<Doctor> doctors;
+
+
 
 	public Specialization() {
 		
 	}
 
 
-	public Specialization(Long id, String specializationName) {
-		
+
+	public Specialization(Long id, String specializationName, List<Doctor> doctors) {
+		super();
 		this.id = id;
 		this.specializationName = specializationName;
+		this.doctors = doctors;
 	}
+
 
 
 	public Long getId() {
@@ -36,9 +47,11 @@ public class Specialization {
 	}
 
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 
 	public String getSpecializationName() {
@@ -46,8 +59,25 @@ public class Specialization {
 	}
 
 
+
 	public void setSpecializationName(String specializationName) {
 		this.specializationName = specializationName;
 	}
+
+
+
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+
+
+	
+
 	
 }

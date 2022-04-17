@@ -41,7 +41,7 @@ public class SpecializationServiceImpl implements SpecializationService{
 	
 
 	@Override
-	public void deleteSpecialization(Long specializationId) {
+	public void deleteSpecialization(Long id) {
 		// TODO Auto-generated method stub
 		
 	}
