@@ -1,5 +1,6 @@
 package com.habay.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class Specialization {
 		      },
 mappedBy="specializations")
 	 @JsonIgnore
-private List<Doctor> doctors;
+private List<Doctor> doctors = new ArrayList<>();
 
 
 

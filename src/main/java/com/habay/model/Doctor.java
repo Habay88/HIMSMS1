@@ -150,7 +150,25 @@ public class Doctor {
 		this.specializations = specializations;
 	}
 
-	
+public void addSpecialization(Specialization specialization) {
+	this.specializations.add(specialization);
+	specialization.getDoctors().add(this);
+}	
+public void removeSpec(long specializationId) {
+	Specialization specialization = this.specializations.stream().filter
+	(t -> t.getId() == specializationId).findFirst().orElse(null);
+if(specialization != null) this.specializations.remove(specialization);
+specialization.getDoctors().remove(this);
+
+}
+
+
+@Override
+public String toString() {
+	return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+			+ ", professionalStatement=" + professionalStatement + ", practicing_from=" + practicing_from
+			+ ", createTime=" + createTime + ", specializations=" + specializations + "]";
+}
 
 	
 }

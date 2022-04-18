@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.habay.exception.NotFoundException;
+
 
 import com.habay.model.Doctor;
 
@@ -51,6 +51,11 @@ public List<Doctor> findAllDoctors(){
 	public Optional<Doctor> findByfirstNameandlastNameandemail(String firstName, String lastName, String email) {
 		// TODO Auto-generated method stub
 		return drepo.findByfirstNameandlastNameandemail(firstName, lastName, email);
+	}
+	@Override
+	public Optional<Doctor> editDoctorInfo(Long id) {
+		// TODO Auto-generated method stub
+		return drepo.findById(id);
 	}
 	
 

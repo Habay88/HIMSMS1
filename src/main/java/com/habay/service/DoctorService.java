@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import com.habay.model.Doctor;
+import com.habay.model.Specialization;
 
 public interface DoctorService {
 
 	Doctor saveDoctor(Doctor doctor);
 
 	void deleteDoctor(Long doctorId);
+	public Optional <Doctor> editDoctorInfo(Long id);
 
 	List<Doctor> findAllDoctors();
 

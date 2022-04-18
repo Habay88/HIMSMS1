@@ -1,7 +1,7 @@
 package com.habay.exception;
 
-public class NotFoundException extends RuntimeException {
-    public NotFoundException(String message) {
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
         super(message);
     }
 }
