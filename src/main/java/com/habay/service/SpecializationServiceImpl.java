@@ -55,9 +55,9 @@ public class SpecializationServiceImpl implements SpecializationService{
 	
 
 	@Override
-	public Optional<Specialization> findOne(Long id) {
+	public Optional<Specialization> findOne(Long specid) {
 		// TODO Auto-generated method stub
-		return srepo.findById(id);
+		return srepo.findById(specid);
 	}
 
 

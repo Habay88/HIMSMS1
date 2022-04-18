@@ -16,7 +16,7 @@ public interface SpecializationService {
 
 	List<Specialization> findAllSpecializations();
 
-public Optional<Specialization> findOne(Long id);
+public Optional<Specialization> findOne(Long specid);
 
 Iterable<Specialization> findByTitleContaining(String title);
 

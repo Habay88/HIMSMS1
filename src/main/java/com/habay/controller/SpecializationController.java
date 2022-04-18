@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.habay.exception.ResourceNotFoundException;
 import com.habay.model.Specialization;
+import com.habay.service.DoctorService;
 import com.habay.service.SpecializationService;
 
 @RestController
@@ -25,6 +27,27 @@ import com.habay.service.SpecializationService;
 public class SpecializationController {
 	@Autowired
 	SpecializationService spservice;
+	@Autowired
+	DoctorService dservice;
+	
+	@PostMapping("/doctors/{doctorId}/specs")
+	public ResponseEntity<Specialization> addDoctorSpecialization(@PathVariable(value="doctorId")Long doctorId,@RequestBody Specialization specRequest){
+		Specialization specialization = dservice.findOne(doctorId).map(doctor ->{
+			long specid = specRequest.getId();
+			// spec is existed
+			if(specid !=0L) {
+				Specialization _specialization = spservice.findOne(specid)
+				.orElseThrow(()-> new ResourceNotFoundException("not found spec with id =" + specid));
+				doctor.addSpecialization(_specialization);
+				dservice.saveDoctor(doctor);
+				return _specialization;
+			}
+			//add and create new Specialization
+			doctor.addSpecialization(specRequest);
+			return spservice.saveSpecialization(specRequest);
+}).orElseThrow(() -> new ResourceNotFoundException("not found doctor with id =" + doctorId));
+	return new ResponseEntity<>(specialization,HttpStatus.CREATED);
+	}
 	
 	@PostMapping
 	public ResponseEntity<Specialization> createSpecialization(@RequestBody Specialization specialization) {
