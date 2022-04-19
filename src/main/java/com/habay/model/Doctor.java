@@ -2,6 +2,8 @@ package com.habay.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -37,30 +39,30 @@ public class Doctor {
 	@Column(name="create_time")
 	private LocalDateTime createTime;
 	
-	@ManyToMany(fetch = FetchType.LAZY,
-		      cascade = {
-		          CascadeType.PERSIST,
-		          CascadeType.MERGE
-		      })
-	//@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="doctor_specialization",
-	joinColumns = @JoinColumn(name="specialization_Id",
-	referencedColumnName="id"),
-	inverseJoinColumns =@JoinColumn(name="doctor_id",
-	referencedColumnName = "id"))
-	private List<Specialization> specializations;
-	
+//	@ManyToMany(fetch = FetchType.LAZY,  cascade = {
+//		    CascadeType.PERSIST, CascadeType.MERGE
+//		      })
+//	@JoinTable(
+//	name="doctor_specialization",
+//	joinColumns = @JoinColumn(name="specialization_Id"),
+//	inverseJoinColumns =@JoinColumn(name="doctor_id"))
+	@ManyToMany(targetEntity = Specialization.class,cascade = CascadeType.ALL)
+	private List<Specialization> specializations ;
 
 	public Doctor() {
 		
 	}
 
+	
 
-	public Doctor(Long id, String firstName, String lastName,
-			@Email(message = "Please enter a valid e-mail address") String email, String professionalStatement,
+	
+
+
+
+	public Doctor(String firstName, String lastName,
+			String email, String professionalStatement,
 			LocalDate practicing_from, LocalDateTime createTime, List<Specialization> specializations) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -69,6 +71,12 @@ public class Doctor {
 		this.createTime = createTime;
 		this.specializations = specializations;
 	}
+
+
+
+
+	
+
 
 
 	public Long getId() {
@@ -85,46 +93,37 @@ public class Doctor {
 		return firstName;
 	}
 
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 
 	public String getLastName() {
 		return lastName;
 	}
 
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getProfessionalStatement() {
 		return professionalStatement;
 	}
 
-
 	public void setProfessionalStatement(String professionalStatement) {
 		this.professionalStatement = professionalStatement;
 	}
 
-
 	public LocalDate getPracticing_from() {
 		return practicing_from;
 	}
-
 
 	public void setPracticing_from(LocalDate practicing_from) {
 		this.practicing_from = practicing_from;
@@ -135,10 +134,14 @@ public class Doctor {
 		return createTime;
 	}
 
-
 	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
 	}
+
+
+
+
+
 
 
 	public List<Specialization> getSpecializations() {
@@ -146,29 +149,47 @@ public class Doctor {
 	}
 
 
+
+
+
+
+
 	public void setSpecializations(List<Specialization> specializations) {
 		this.specializations = specializations;
 	}
+	
+	
 
-public void addSpecialization(Specialization specialization) {
-	this.specializations.add(specialization);
-	specialization.getDoctors().add(this);
-}	
-public void removeSpec(long specializationId) {
-	Specialization specialization = this.specializations.stream().filter
-	(t -> t.getId() == specializationId).findFirst().orElse(null);
-if(specialization != null) this.specializations.remove(specialization);
-specialization.getDoctors().remove(this);
-
-}
+	
+	
 
 
-@Override
-public String toString() {
-	return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-			+ ", professionalStatement=" + professionalStatement + ", practicing_from=" + practicing_from
-			+ ", createTime=" + createTime + ", specializations=" + specializations + "]";
-}
+
+
+
+	
+
+
+
+	
+	
+
+
+
+
+//public void addSpecialization(Specialization specialization) {
+//	this.specializations.add(specialization);
+//	specialization.getDoctors().add(this);
+//}	
+//public void removeSpec(long specializationId) {
+//	Specialization specialization = this.specializations.stream().filter
+//	(t -> t.getId() == specializationId).findFirst().orElse(null);
+//if(specialization != null) this.specializations.remove(specialization);
+//specialization.getDoctors().remove(this);
+//
+//}
+
+
 
 	
 }

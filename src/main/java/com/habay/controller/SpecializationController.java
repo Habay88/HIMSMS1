@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.habay.exception.ResourceNotFoundException;
+import com.habay.model.Doctor;
 import com.habay.model.Specialization;
+import com.habay.repo.DoctorRepository;
+import com.habay.repo.SpecializationRepository;
 import com.habay.service.DoctorService;
 import com.habay.service.SpecializationService;
 
@@ -29,25 +32,39 @@ public class SpecializationController {
 	SpecializationService spservice;
 	@Autowired
 	DoctorService dservice;
+	@Autowired
+	SpecializationRepository sprepo;
+	@Autowired
+	DoctorRepository drepo;
 	
-	@PostMapping("/doctors/{doctorId}/specs")
-	public ResponseEntity<Specialization> addDoctorSpecialization(@PathVariable(value="doctorId")Long doctorId,@RequestBody Specialization specRequest){
-		Specialization specialization = dservice.findOne(doctorId).map(doctor ->{
-			long specid = specRequest.getId();
-			// spec is existed
-			if(specid !=0L) {
-				Specialization _specialization = spservice.findOne(specid)
-				.orElseThrow(()-> new ResourceNotFoundException("not found spec with id =" + specid));
-				doctor.addSpecialization(_specialization);
-				dservice.saveDoctor(doctor);
-				return _specialization;
-			}
-			//add and create new Specialization
-			doctor.addSpecialization(specRequest);
-			return spservice.saveSpecialization(specRequest);
-}).orElseThrow(() -> new ResourceNotFoundException("not found doctor with id =" + doctorId));
-	return new ResponseEntity<>(specialization,HttpStatus.CREATED);
-	}
+//	@PostMapping("/doctors/{doctorId}/specs")
+//	public ResponseEntity<Specialization> addDoctorSpecialization(@PathVariable(value="doctorId")Long doctorId,@RequestBody Specialization specRequest){
+//		Specialization specialization = dservice.findOne(doctorId).map(doctor ->{
+//			long specid = specRequest.getId();
+//			// spec is existed
+//			if(specid !=0L) {
+//				Specialization _specialization = spservice.findOne(specid)
+//				.orElseThrow(()-> new ResourceNotFoundException("not found spec with id =" + specid));
+//				doctor.addSpecialization(_specialization);
+//				dservice.saveDoctor(doctor);
+//				return _specialization;
+//			}
+//			//add and create new Specialization
+//			doctor.addSpecialization(specRequest);
+//			return spservice.saveSpecialization(specRequest);
+//}).orElseThrow(() -> new ResourceNotFoundException("not found doctor with id =" + doctorId));
+//	return new ResponseEntity<>(specialization,HttpStatus.CREATED);
+//	}
+	
+//	@GetMapping("specs/{specid}/doctors")
+//	public ResponseEntity<List<Doctor>> getAllDoctorsBySpecializationId(@PathVariable(value="specid") Long specid,String firstName,String lastName){
+//	
+//		if(!sprepo.existsById(specid)) {
+//			throw new ResourceNotFoundException("not found with id= "+ specid);
+//			}
+//		List<Doctor> doctors = drepo.findDoctorBySpecId(firstName,lastName,specid);
+//		return new ResponseEntity<>(doctors,HttpStatus.OK);
+//	}
 	
 	@PostMapping
 	public ResponseEntity<Specialization> createSpecialization(@RequestBody Specialization specialization) {

@@ -1,6 +1,7 @@
 package com.habay.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,31 +28,42 @@ public class Specialization {
 	
 	@Column(name="specializationname", length=100, nullable=false,unique=true)
 	private String specializationName;
+
 	
-	
-	 @ManyToMany(fetch = FetchType.LAZY,
-		      cascade = {
-		          CascadeType.PERSIST,
-		          CascadeType.MERGE
-		      },
-mappedBy="specializations")
-	 @JsonIgnore
-private List<Doctor> doctors = new ArrayList<>();
-
-
-
-	public Specialization() {
+  	public Specialization() {
 		
 	}
 
 
 
-	public Specialization(Long id, String specializationName, List<Doctor> doctors) {
+
+
+
+
+
+	public Specialization(Long id, String specializationName) {
 		super();
 		this.id = id;
 		this.specializationName = specializationName;
-		this.doctors = doctors;
 	}
+
+
+
+
+
+
+
+
+	public Specialization(String specializationName) {
+		
+		this.specializationName = specializationName;
+		
+	}
+
+
+
+
+
 
 
 
@@ -78,15 +91,11 @@ private List<Doctor> doctors = new ArrayList<>();
 
 
 
-	public List<Doctor> getDoctors() {
-		return doctors;
+	@Override
+	public String toString() {
+		return "Specialization [id=" + id + ", specializationName=" + specializationName + "]";
 	}
 
-
-
-	public void setDoctors(List<Doctor> doctors) {
-		this.doctors = doctors;
-	}
 
 
 	
