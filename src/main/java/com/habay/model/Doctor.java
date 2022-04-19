@@ -39,15 +39,12 @@ public class Doctor {
 	@Column(name="create_time")
 	private LocalDateTime createTime;
 	
-//	@ManyToMany(fetch = FetchType.LAZY,  cascade = {
-//		    CascadeType.PERSIST, CascadeType.MERGE
-//		      })
-//	@JoinTable(
-//	name="doctor_specialization",
-//	joinColumns = @JoinColumn(name="specialization_Id"),
-//	inverseJoinColumns =@JoinColumn(name="doctor_id"))
+
 	@ManyToMany(targetEntity = Specialization.class,cascade = CascadeType.ALL)
 	private List<Specialization> specializations ;
+	
+	@ManyToOne(targetEntity=Qualifications.class, cascade = CascadeType.ALL)
+	private Qualifications qualifications;
 
 	public Doctor() {
 		
@@ -59,10 +56,20 @@ public class Doctor {
 
 
 
-	public Doctor(String firstName, String lastName,
+
+
+
+
+	
+
+
+
+	public Doctor(Long id, String firstName, String lastName,
 			String email, String professionalStatement,
-			LocalDate practicing_from, LocalDateTime createTime, List<Specialization> specializations) {
+			LocalDate practicing_from, LocalDateTime createTime, List<Specialization> specializations,
+			Qualifications qualifications) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -70,12 +77,20 @@ public class Doctor {
 		this.practicing_from = practicing_from;
 		this.createTime = createTime;
 		this.specializations = specializations;
+		this.qualifications = qualifications;
 	}
 
 
 
 
-	
+
+
+
+
+
+
+
+
 
 
 
@@ -137,6 +152,42 @@ public class Doctor {
 	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
 	}
+
+
+
+
+
+
+
+	public Qualifications getQualifications() {
+		return qualifications;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setQualifications(Qualifications qualifications) {
+		this.qualifications = qualifications;
+	}
+
+
+
+
+
+
+
+
 
 
 
