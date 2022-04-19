@@ -1,3 +1,4 @@
+https://vertabelo.com/blog/the-doctor-will-see-you-soon-a-data-model-for-a-medical-appointment-booking-app/
 
 March 1, 2017 - 10 minutes read
 Example er diagrams
