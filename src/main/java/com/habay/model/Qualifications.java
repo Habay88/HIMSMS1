@@ -18,7 +18,7 @@ public class Qualifications {
 	private Long id;
 	
 	@Column(name="doctor_id", length=100, nullable=false)
-	private int doctor_id;
+	private Long doctorId;
 	
 	@Column(name="qualificationname", length=100, nullable=false)
 	private String qualificationName;
@@ -33,22 +33,30 @@ public class Qualifications {
 	
 	}
 
-	public Qualifications(Long id, int doctor_id, String qualificationName, String instituteName,
+	public Qualifications(Long id, Long doctorId, String qualificationName, String instituteName,
 			LocalDate procurement_year) {
-		
+		super();
 		this.id = id;
-		this.doctor_id = doctor_id;
+		this.doctorId = doctorId;
 		this.qualificationName = qualificationName;
 		this.instituteName = instituteName;
 		this.procurement_year = procurement_year;
 	}
 
-	public int getDoctor_id() {
-		return doctor_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDoctor_id(int doctor_id) {
-		this.doctor_id = doctor_id;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(Long doctorId) {
+		this.doctorId = doctorId;
 	}
 
 	public String getQualificationName() {
@@ -74,7 +82,18 @@ public class Qualifications {
 	public void setProcurement_year(LocalDate procurement_year) {
 		this.procurement_year = procurement_year;
 	}
+
+	@Override
+	public String toString() {
+		return "Qualifications [id=" + id + ", doctorId=" + doctorId + ", qualificationName=" + qualificationName
+				+ ", instituteName=" + instituteName + ", procurement_year=" + procurement_year + "]";
+	}
+
+
+
 	
-	
+
+
+
 	
 }
