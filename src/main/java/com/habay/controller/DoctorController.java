@@ -60,7 +60,7 @@ public class DoctorController {
 	public ResponseEntity<Doctor> getDoctorbyId(@PathVariable("id") Long id)
 	{
 	Doctor doctor = dservice.findOne(id)
-	.orElseThrow(() -> new ResourceNotFoundException ("Not Found Doctor with id=" + id));			
+	.orElseThrow(() -> new ResourceNotFoundException ("Not Found Doctor with id=" + id, null, id));			
 	return new ResponseEntity<>(doctor, HttpStatus.OK);
 	}
 }

@@ -107,7 +107,7 @@ public class SpecializationController {
 	Optional<Specialization> specData = spservice.editSpecialization(id);
 	if(specData.isPresent()) {
 		Specialization _spec = specData.get();
-		_spec.setSpecializationName(spec.getSpecializationName());
+	//	_spec.setSpecializationName(spec.getSpecializationName());
 		return new ResponseEntity<>(spservice.saveSpecialization(_spec),HttpStatus.OK);
 	}else {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);

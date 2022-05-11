@@ -48,7 +48,8 @@ public class DoctorServiceImpl implements DoctorService{
 			doctor.setPracticing_from(model.getPracticing_from());
 			doctor.setProfessionalStatement(model.getProfessionalStatement());
 			doctor.setEmail(model.getEmail());
-			doctor.setSpecializations(model.getSpecializations());
+		//	doctor.setQualifications(model.getQualifications());
+	//		doctor.setSpecializations(model.getSpecializations());
 			doctor.setCreateTime(LocalDateTime.now());
 			
 			Doctor savedDoctor = drepo.save(doctor);
@@ -68,7 +69,7 @@ public class DoctorServiceImpl implements DoctorService{
 		newDoctor.setEmail(doctor.getEmail());
 		newDoctor.setPracticing_from(doctor.getPracticing_from());
 		newDoctor.setProfessionalStatement(doctor.getProfessionalStatement());;
-		newDoctor.setSpecializations(doctor.getSpecializations());
+	//	newDoctor.setSpecializations(doctor.getSpecializations());
 		Doctor savedDoctor = drepo.save(newDoctor);
 		if(drepo.findById(savedDoctor.getId()).isPresent())
 		return ResponseEntity.accepted().body("Doctor Updated Successfully");
