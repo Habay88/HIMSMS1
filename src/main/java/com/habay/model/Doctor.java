@@ -47,7 +47,7 @@ public class Doctor {
 //	private Set<Specialization> specializations = new HashSet<>() ;
 	
 	@OneToMany(mappedBy="doctor", cascade = CascadeType.ALL,orphanRemoval=true)
-	private List<Qualifications> qualifications = new ArrayList<>();
+	private Set<Qualifications> qualifications = new HashSet<>();
 //
 //	@OneToMany(mappedBy="doctor", cascade = CascadeType.ALL,orphanRemoval=true)
 //	private Set<HospitalAffiliation> hospitalAffiliations = new HashSet<>();
@@ -123,12 +123,12 @@ public class Doctor {
 	}
 
 
-	public List<Qualifications> getQualifications() {
+	public Set<Qualifications> getQualifications() {
 		return qualifications;
 	}
 
 
-	public void setQualifications(List<Qualifications> qualifications) {
+	public void setQualifications(Set<Qualifications> qualifications) {
 		this.qualifications = qualifications;
 		for(Qualifications q : qualifications) {
 			q.setDoctor(this);

@@ -19,6 +19,8 @@ public interface QualificationsRepository extends JpaRepository<Qualifications, 
 //
 //Qualifications save(Qualifications qualification, Doctor doctorid);
 
+void deleteByDoctorId(Long doctorId);
+
 //List<Qualifications> saveDoctor(Qualifications qualification, Doctor doctorid);
 
 //Qualifications save(Qualifications qualification, Doctor doctorid);
