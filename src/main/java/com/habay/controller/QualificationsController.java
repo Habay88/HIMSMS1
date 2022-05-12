@@ -56,7 +56,7 @@ public class QualificationsController {
 		Qualifications qualification = drepo.findById(doctorId).map(doctor ->{
 			qualificationRequest.setDoctor(doctor);
 			return qrepo.save(qualificationRequest);
-		}).orElseThrow(() -> new ResourceNotFoundException("Not fpund doctor with id = " + doctorId, null, doctorId));
+		}).orElseThrow(() -> new ResourceNotFoundException("Not found doctor with id = " + doctorId, null, doctorId));
 		return new ResponseEntity<>(qualification,HttpStatus.CREATED);
 		
 	}
