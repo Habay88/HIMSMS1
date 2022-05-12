@@ -32,7 +32,7 @@ public class Specialization {
 	private String specializationName;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "doctor_id", nullable=false)
+	//@JoinColumn(name = "doctor_id", nullable=false)
 	private Doctor doctor;
 	
   

@@ -42,15 +42,19 @@ public class Doctor {
 	@Column(name="create_time")
 	private LocalDateTime createTime;
 	
-
-//	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL,orphanRemoval=true )
-//	private Set<Specialization> specializations = new HashSet<>() ;
-	
 	@OneToMany(mappedBy="doctor", cascade = CascadeType.ALL,orphanRemoval=true)
 	private Set<Qualifications> qualifications = new HashSet<>();
-//
-//	@OneToMany(mappedBy="doctor", cascade = CascadeType.ALL,orphanRemoval=true)
-//	private Set<HospitalAffiliation> hospitalAffiliations = new HashSet<>();
+
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval=true )
+	@JoinTable(name="doctor_specialization",
+	joinColumns = {@JoinColumn(name="doctor_id", referencedColumnName="id")},
+	inverseJoinColumns = {@JoinColumn(name="specialization_id",referencedColumnName="id")})
+	private Set<Specialization> specializations = new HashSet<>() ;
+	
+	
+
+	@OneToMany(mappedBy="doctor", cascade = CascadeType.ALL,orphanRemoval=true)
+	private Set<HospitalAffiliation> hospitalAffiliations = new HashSet<>();
 
 
 	public Long getId() {
@@ -134,6 +138,27 @@ public class Doctor {
 			q.setDoctor(this);
 		}
 	}
+
+
+	public Set<Specialization> getSpecializations() {
+		return specializations;
+	}
+
+
+	public void setSpecializations(Set<Specialization> specializations) {
+		this.specializations = specializations;
+	}
+
+
+	public Set<HospitalAffiliation> getHospitalAffiliations() {
+		return hospitalAffiliations;
+	}
+
+
+	public void setHospitalAffiliations(Set<HospitalAffiliation> hospitalAffiliations) {
+		this.hospitalAffiliations = hospitalAffiliations;
+	}
+	
 	
 
 }
