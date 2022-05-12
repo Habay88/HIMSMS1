@@ -1,5 +1,6 @@
 package com.habay.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import lombok.Data;
 
 @Entity
 @Table(name="doctor")
-public class Doctor {
+public class Doctor implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,10 +46,7 @@ public class Doctor {
 	@OneToMany(mappedBy="doctor", cascade = CascadeType.ALL,orphanRemoval=true)
 	private Set<Qualifications> qualifications = new HashSet<>();
 
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval=true )
-	@JoinTable(name="doctor_specialization",
-	joinColumns = {@JoinColumn(name="doctor_id", referencedColumnName="id")},
-	inverseJoinColumns = {@JoinColumn(name="specialization_id",referencedColumnName="id")})
+	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL,orphanRemoval=true )
 	private Set<Specialization> specializations = new HashSet<>() ;
 	
 	
@@ -147,6 +145,9 @@ public class Doctor {
 
 	public void setSpecializations(Set<Specialization> specializations) {
 		this.specializations = specializations;
+//		for(Specialization s : specializations) {
+//			s.setDoctor(this);
+//		}
 	}
 
 

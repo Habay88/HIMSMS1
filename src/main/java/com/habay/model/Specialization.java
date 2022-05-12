@@ -19,7 +19,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Data;
+@Data
 @Entity
 @Table(name="specialization")
 public class Specialization {
@@ -32,7 +35,8 @@ public class Specialization {
 	private String specializationName;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	//@JoinColumn(name = "doctor_id", nullable=false)
+	@JoinColumn(name = "doctor_id", nullable=false)
+	@JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
 	private Doctor doctor;
 	
   

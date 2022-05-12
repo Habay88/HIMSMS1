@@ -11,7 +11,9 @@ import com.habay.model.Specialization;
 @Repository
 public interface SpecializationRepository extends JpaRepository<Specialization,Long>{
 
-//	List<Specialization> findSpecializationByDoctors(Long DoctorId);
+	List<Specialization> findBydoctorId(Long doctorId);
+
+	void deleteByDoctorId(Long doctorId);
 	
 
 }
