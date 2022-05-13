@@ -158,6 +158,9 @@ public class Doctor implements Serializable {
 
 	public void setHospitalAffiliations(Set<HospitalAffiliation> hospitalAffiliations) {
 		this.hospitalAffiliations = hospitalAffiliations;
+		for(HospitalAffiliation h : hospitalAffiliations) {
+			h.setDoctor(this);
+		}
 	}
 	
 	

@@ -1,35 +1,35 @@
 package com.habay.service;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.habay.exception.ResourceNotFoundException;
-import com.habay.model.Doctor;
-import com.habay.model.Qualifications;
-import com.habay.repo.DoctorRepository;
-import com.habay.repo.QualificationsRepository;
-
-
-
-@Service
-public class QualificationServiceImpl implements QualificationService {
-
-	@Autowired
-	QualificationsRepository quarepo;
-	
-	DoctorRepository drepo;
-	
-	
-
-	public QualificationServiceImpl(QualificationsRepository quarepo, DoctorRepository drepo) {
-		this.quarepo = quarepo;
-		this.drepo = drepo;
-	}
+//import java.time.LocalDateTime;
+//import java.time.LocalTime;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Service;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//import com.habay.exception.ResourceNotFoundException;
+//import com.habay.model.Doctor;
+//import com.habay.model.Qualifications;
+//import com.habay.repo.DoctorRepository;
+//import com.habay.repo.QualificationsRepository;
+//
+//
+//
+//@Service
+//public class QualificationServiceImpl implements QualificationService {
+//
+//	@Autowired
+//	QualificationsRepository quarepo;
+//	
+//	DoctorRepository drepo;
+//	
+//	
+//
+//	public QualificationServiceImpl(QualificationsRepository quarepo, DoctorRepository drepo) {
+//		this.quarepo = quarepo;
+//		this.drepo = drepo;
+//	}
 //
 //	@Override
 //	@Transactional
@@ -61,12 +61,12 @@ public class QualificationServiceImpl implements QualificationService {
 //	}
 
 
-
-	@Override
-	public ResponseEntity<Object> updateQualification(Qualifications qualifications, Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//
+//	@Override
+//	public ResponseEntity<Object> updateQualification(Qualifications qualifications, Long id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 
@@ -108,7 +108,7 @@ public class QualificationServiceImpl implements QualificationService {
 //
 //
 //} else return ResponseEntity.unprocessableEntity().body("Cannot find the doctor specified");
-}
+//}
   
 	
 

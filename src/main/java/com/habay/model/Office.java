@@ -1,9 +1,7 @@
 package com.habay.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,28 +20,37 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="hospital_affiliation")
-public class HospitalAffiliation {
-
-
+@Table(name="office")
+public class Office {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="hospitalname", length=100, nullable=false)
-	private String HospitalName;
-	@Column(name="city", length=100, nullable=false)
-	private String City;
-	@Column(name="country", length=50, nullable=false)
-	private String Country;
-	@Column(name="startDate", nullable=false)
-	private Date StartDate;
+
+	private int time_slot_per_client_in_min;
 	
-	@Column(name="endDate",  nullable=false)
-	private Date EndDate;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "doctor_id", nullable=false)
+	private int first_consultation_fee;
+	
+	private int followup_consultation_fee;
+	
+	private String street_address;
+	
+	private String city;
+	
+	private String state;
+	
+	private String country;
+	
+	private String zip;
+	
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name = "doctor_id")
 	@JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
 	private Doctor doctor;
 	
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name = "hospital_affiliation_id")
+	@JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+	private HospitalAffiliation hospital_affiliation;
+	
 }
-
